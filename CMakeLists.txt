@@ -9,6 +9,10 @@ project(${PROJECT_NAME}
     LANGUAGES CXX
 )
 
+if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+    message(FATAL_ERROR "In-source builds are not allowed")
+endif()
+
 message(STATUS "Configuring project ${CMAKE_PROJECT_NAME}: ${CMAKE_PROJECT_VERSION}")
 message(STATUS "Version Major.Minor.Pathch.Tweak: "
     "${CMAKE_PROJECT_VERSION_MAJOR}."
@@ -21,3 +25,5 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 include(Print)
 include(CXX)
 include(SystemInfo)
+
+add_executable(test_cxx_20 test_cxx_20.cpp)

@@ -31,5 +31,25 @@ foreach(feature cxx_std_98
     endif()
 endforeach()
 
+try_compile( compile_result SOURCES  ${CMAKE_SOURCE_DIR}/test_cxx_20.cpp
+    OUTPUT_VARIABLE output_result
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+message(STATUS "try compile test_cxx_20.cpp... ")
+message(STATUS "${output_result}")
+message(STATUS "compile test_cxx_20.cpp: ${compile_result}")
+
+try_run(run_result compile_result ${CMAKE_BINARY_DIR}/bin
+    SOURCES  ${CMAKE_SOURCE_DIR}/test_cxx_20.cpp
+    OUTPUT_VARIABLE output_result
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+message(STATUS "run test_cxx_20.cpp: ${output_result}")
+message(STATUS "run test_cxx_20.cpp, compile: ${compile_result}")
+message(STATUS "run test_cxx_20.cpp, run: ${run_result}")
 
 # TODO (tonghao): clang_tidy, cppcheck...
