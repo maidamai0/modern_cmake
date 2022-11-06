@@ -21,7 +21,12 @@ message(STATUS "Version Major.Minor.Pathch.Tweak: "
     "${CMAKE_PROJECT_VERSION_TWEAK}"
 )
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+
+
 include(Print)
 include(CXX)
 include(SystemInfo)
@@ -31,7 +36,10 @@ include(FindDeps)
 include(Analysis)
 include(Doc)
 include(Pack)
+Doxygen()
 
 add_executable(test_cxx_20 test_cxx_20.cpp)
-Doxygen()
+add_subdirectory(lib)
+
 Format(test_cxx_20 ${CMAKE_CURRENT_LIST_DIR})
+include(Install)

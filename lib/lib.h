@@ -19,7 +19,7 @@
  *
  */
 class Foo {
- public:
+public:
   Foo() = default;
 
   /**
@@ -36,9 +36,9 @@ class Foo {
    * @param c   parameter c is a floating point number
    * @return    some return value of integer type
    */
-  int Func(int a, const std::string& b, float c);
+  int Func(int a, const std::string &b, float c);
 
- private:
+private:
   std::string str;
 };
 
@@ -63,8 +63,7 @@ class Undocumented {};
 class PublicBase : public Truncated {};
 
 /*! A template class */
-template <class T>
-class Templ {};
+template <class T> class Templ {};
 
 /*! Class that is inherited using protected inheritance */
 class ProtectedBase {};
@@ -81,6 +80,6 @@ class Inherited : public PublicBase,
                   private PrivateBase,
                   public Undocumented,
                   public Templ<int> {
- private:
-  Used* m_usedClass;
+private:
+  Used *m_usedClass;
 };

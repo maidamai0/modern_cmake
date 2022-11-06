@@ -1,0 +1,4 @@
+@PACKAGE_INIT@
+set_and_check(ModernCMake_LIB_DIR "@PACKAGE_LIB_INSTALL_DIR@")
+include("${ModernCMake_LIB_DIR}/cmake/ModernCMakeTargets.cmake")
+check_required_components(ModernCMake)

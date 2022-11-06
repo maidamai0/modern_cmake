@@ -10,9 +10,9 @@ set(CPACK_CREATE_DESKTOP_LINKS ${PROJECT_NAME})
 
 include(InstallRequiredSystemLibraries)
 
-set(CPACK_GENERATOR ZIP)
+set(CPACK_GENERATOR WIX ZIP)
 
 # set(CPACK_WIX_PRODUCT_ICON "${CMAKE_SOURCE_DIR}/assets/logo_150.ico")
-# set(CPACK_WIX_LIGHT_EXTRA_FLAGS "-dcl:high")
+set(CPACK_WIX_LIGHT_EXTRA_FLAGS "-dcl:high")
 
 include(CPack)
