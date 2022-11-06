@@ -52,4 +52,12 @@ message(STATUS "run test_cxx_20.cpp: ${output_result}")
 message(STATUS "run test_cxx_20.cpp, compile: ${compile_result}")
 message(STATUS "run test_cxx_20.cpp, run: ${run_result}")
 
-# TODO (tonghao): clang_tidy, cppcheck...
+# windows specific
+if(MSVC)
+  # add_compile_options(/fsanitize=address)
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+  add_compile_definitions(_UNICODE UNICODE _WINDOWS WIN32 WIN32_LEAN_AND_MEAN _SILENCE_CLANG_COROUTINE_MESSAGE)
+  add_compile_options(/Zc:__cplusplus) # see https://docs.microsoft.com/en-us/cpp/build/reference/zc-cplusplus?view=msvc-160 for detail
+endif()
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

@@ -9,7 +9,29 @@ execute_process(COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%h
 )
 message(STATUS "Commit hash is ${SHA}")
 
-# TODO (tonghao): get latest tag and parse to version string
+# get version
+execute_process(
+  COMMAND           git describe --tags --abbrev=0
+  WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+  RESULT_VARIABLE   git_result
+  OUTPUT_VARIABLE   git_tag
+  ERROR_VARIABLE    git_error
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  ERROR_STRIP_TRAILING_WHITESPACE
+)
+
+if(NOT git_result EQUAL 0)
+  message(FATAL_ERROR "git describe --tags --abbrev=0: ${git_error}")
+endif()
+
+if(git_tag MATCHES "^v(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)$")
+  set( version_major "${CMAKE_MATCH_1}" )
+  set( version_minor "${CMAKE_MATCH_2}" )
+  set( version_patch "${CMAKE_MATCH_3}" )
+else()
+  message(FATAL_ERROR "Git tag isn't valid semantic version: [${git_tag}]")
+endif()
+set(version ${version_major}.${version_minor}.${version_patch}.${git_commit_count})
 
 # auto update submodule
 execute_process(
