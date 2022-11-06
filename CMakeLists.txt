@@ -5,7 +5,7 @@ get_filename_component(PROJECT_NAME ${CMAKE_CURRENT_LIST_DIR} NAME)
 project(${PROJECT_NAME}
     VERSION 1.0.0.0
     DESCRIPTION "Modern CMake tricks"
-    HOMEPAGE_URL "http://tonghao.yuan.com"
+    HOMEPAGE_URL "https://github.com/maidamai0/modern_cmake"
     LANGUAGES CXX
 )
 
@@ -30,6 +30,7 @@ include(Git)
 include(FindDeps)
 include(Analysis)
 include(Doc)
+include(Pack)
 
 add_executable(test_cxx_20 test_cxx_20.cpp)
 Doxygen()
